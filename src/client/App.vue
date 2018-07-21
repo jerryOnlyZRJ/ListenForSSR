@@ -1,13 +1,7 @@
 <template>
   <div id="app">
     <div class="main">
-      <h1>Welcome to N.MKV!</h1>
-      <img src="./assets/images/nmkv.jpg">
-      <router-view></router-view>
-      <p>
-        <router-link to="/">Go to Index</router-link>
-        <router-link to="/helloworld">Go to HelloWorld</router-link>
-      </p>
+      
     </div>
   </div>
 </template>

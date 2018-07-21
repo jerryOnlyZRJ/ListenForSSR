@@ -1,6 +1,8 @@
 module.exports = {
-	plugins: {
-		'postcss-preset-env': {},
-		'cssnano': {}
-	}
+  plugins: {
+    'postcss-preset-env': {
+      stage: 0
+    },
+    'cssnano': {}
+  }
 }
