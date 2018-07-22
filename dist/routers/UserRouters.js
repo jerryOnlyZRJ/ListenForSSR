@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _desc, _value, _class2;
+var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _class, _desc, _value, _class2;
 
 var _awilixKoa = require('awilix-koa');
 
@@ -38,31 +38,59 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
     return desc;
 }
 
-let UserRouter = (_dec = (0, _awilixKoa.route)('/user'), _dec2 = (0, _awilixKoa.GET)(), _dec3 = (0, _awilixKoa.route)("/getbranchlist"), _dec4 = (0, _awilixKoa.GET)(), _dec5 = (0, _awilixKoa.route)("/pullbranch"), _dec6 = (0, _awilixKoa.GET)(), _dec(_class = (_class2 = class UserRouter {
+let TestRouter = (_dec = (0, _awilixKoa.route)('/user'), _dec2 = (0, _awilixKoa.GET)(), _dec3 = (0, _awilixKoa.route)("/register"), _dec4 = (0, _awilixKoa.POST)(), _dec5 = (0, _awilixKoa.route)("/login"), _dec6 = (0, _awilixKoa.POST)(), _dec7 = (0, _awilixKoa.route)("/getwordlist"), _dec8 = (0, _awilixKoa.POST)(), _dec9 = (0, _awilixKoa.route)("/getwordlist"), _dec10 = (0, _awilixKoa.POST)(), _dec11 = (0, _awilixKoa.route)("/updatewords"), _dec12 = (0, _awilixKoa.POST)(), _dec(_class = (_class2 = class TestRouter {
     constructor({
-        indexService
+        userService
     }) {
-        this.indexService = indexService;
+        this.userService = userService;
     }
 
-    async getUser(ctx) {
-        ctx.body = {
-            data: 'this is the user service'
-        };
+    async getTest(ctx) {
+        ctx.body = 'test user routers';
     }
 
-    //User Module 子路由
+    // POST {username, password(md5)}
 
-    getBranchList(ctx, next) {
-        ctx.body = {
-            branchList: this.indexService.getBranchList()
-        };
+    async register(ctx) {
+        const {
+            username,
+            password
+        } = ctx.request.body;
+        ctx.body = await this.userService.register(username, password);
     }
 
-    pullBranch(ctx, next) {
-        const branchStr = ctx.request.query.branch;
-        const branchArr = branchStr.split('/');
-        ctx.body = indexModel.pullBranch(branchArr[0], branchArr[1]);
+    // POST {username, password(md5)}
+
+    async login(ctx) {
+        const {
+            username,
+            password
+        } = ctx.request.body;
+        ctx.body = await this.userService.checkPassword(username, password);
     }
-}, (_applyDecoratedDescriptor(_class2.prototype, 'getUser', [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, 'getUser'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'getBranchList', [_dec3, _dec4], Object.getOwnPropertyDescriptor(_class2.prototype, 'getBranchList'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'pullBranch', [_dec5, _dec6], Object.getOwnPropertyDescriptor(_class2.prototype, 'pullBranch'), _class2.prototype)), _class2)) || _class);
-exports.default = UserRouter;
+
+    // GET /user/iswordexists?user=ranjayzheng&title=test
+
+    async isWordExists(ctx) {
+        const {
+            user,
+            title
+        } = ctx.request.query;
+        ctx.body = await this.userService.isWordExists(user, title);
+    }
+
+    // GET /user/getwordlist?user=ranjayzheng
+
+    async getWordList(ctx) {
+        const username = ctx.request.query.user;
+        ctx.body = await this.userService.getWordList(username);
+    }
+
+    // POST {user, title, date, content}
+
+    async updateWords(ctx) {
+        const updateOptions = ctx.request.body;
+        ctx.body = await this.userService.updateWords(updateOptions);
+    }
+}, (_applyDecoratedDescriptor(_class2.prototype, 'getTest', [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, 'getTest'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'register', [_dec3, _dec4], Object.getOwnPropertyDescriptor(_class2.prototype, 'register'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'login', [_dec5, _dec6], Object.getOwnPropertyDescriptor(_class2.prototype, 'login'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'isWordExists', [_dec7, _dec8], Object.getOwnPropertyDescriptor(_class2.prototype, 'isWordExists'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'getWordList', [_dec9, _dec10], Object.getOwnPropertyDescriptor(_class2.prototype, 'getWordList'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'updateWords', [_dec11, _dec12], Object.getOwnPropertyDescriptor(_class2.prototype, 'updateWords'), _class2.prototype)), _class2)) || _class);
+exports.default = TestRouter;

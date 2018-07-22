@@ -48,12 +48,32 @@ class UserService {
     }
   }
 
-  async getWordList(username) {
-    return await this.mongodb.getWordList(username)
+  async isWordExists(user, title) {
+    return await this.mongodb.isWordExists(user, title)
   }
 
-  updateWords(updateOptions) {
-    return await this.mongodb.updateWords(updateOptions)
+  async getWordList(user) {
+    return await this.mongodb.getWordList(user)
+  }
+
+  async updateWords(updateOptions) {
+    const {
+      user,
+      title,
+      date,
+      content
+    } = updateOptions
+    const wordOptions = {
+      title,
+      date,
+      content
+    }
+    const isWordExists = await this.mongodb.isWordExists(user, title)
+    if (isWordExists) {
+      return await this.mongodb.insertWord(user, wordOptions)
+    } else {
+      return await this.mongodb.updateWord(user, wordOptions)
+    }
   }
 }
 

@@ -9,10 +9,6 @@ import mongodb from 'mongodb'
  * @type {Class}
  */
 class Mongodb {
-	async constructor() {
-		this.db = await this.connect2db()
-	}
-
 	connect2db() {
 		const MongoClient = mongodb.MongoClient;
 		const url = 'mongodb://localhost:27017';
@@ -31,6 +27,23 @@ class Mongodb {
 		return new Promise((resolve, reject) => {
 			db.db('listenforuser').collection("users").find({
 				name: username
+			}).toArray(function(err, res) {
+				if (err) reject(err)
+				if (res && res[0]) {
+					resolve(true)
+				} else {
+					resolve(false)
+				}
+				db.close();
+			})
+		})
+	}
+
+	async isWordExists(user, title) {
+		const db = await this.connect2db()
+		return new Promise((resolve, reject) => {
+			db.db('listenfordata').collection(user).find({
+				title: title
 			}).toArray(function(err, res) {
 				if (err) reject(err)
 				if (res && res[0]) {
@@ -88,6 +101,43 @@ class Mongodb {
 		})
 	}
 
-}
+	async insertWord(user, wordOptions) {
+		const db = await this.connect2db()
+		return new Promise((resolve, reject) => {
+			db.db('listenfordata').collection(user).insertOne(wordOptions, function(err, res) {
+				if (err) reject(err)
+				resolve(res)
+				db.close();
+			})
+		})
+	}
 
+	async updateWord(user, wordOptions) {
+		const db = await this.connect2db()
+		const {
+			title,
+			date,
+			content
+		} = wordOptions
+		const whereStr = {
+			"title": title
+		}
+		const updateStr = {
+			$set: {
+				date: date,
+				content: content
+			}
+		}
+		return new Promise((resolve, reject) => {
+			db.db('listenfordata').collection(user).updateOne(whereStr, updateStr, function(err, res) {
+				if (err) throw err;
+				resolve({
+					state: 0,
+					msg: '文档更新成功！'
+				})
+				db.close();
+			})
+		})
+	}
+}
 export default Mongodb

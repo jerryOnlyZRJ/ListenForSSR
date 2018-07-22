@@ -19,17 +19,6 @@ export default class TestRouter {
     }
 
     // POST {username, password(md5)}
-    @route("/login")
-    @POST()
-    async login(ctx) {
-        const {
-            username,
-            password
-        } = ctx.request.body
-        ctx.body = await this.userService.checkPassword(username, password)
-    }
-
-    // POST {username, password(md5)}
     @route("/register")
     @POST()
     async register(ctx) {
@@ -40,6 +29,28 @@ export default class TestRouter {
         ctx.body = await this.userService.register(username, password)
     }
 
+    // POST {username, password(md5)}
+    @route("/login")
+    @POST()
+    async login(ctx) {
+        const {
+            username,
+            password
+        } = ctx.request.body
+        ctx.body = await this.userService.checkPassword(username, password)
+    }
+
+    // GET /user/iswordexists?user=ranjayzheng&title=test
+    @route("/getwordlist")
+    @POST()
+    async isWordExists(ctx) {
+        const {
+            user,
+            title
+        } = ctx.request.query
+        ctx.body = await this.userService.isWordExists(user, title)
+    }
+
     // GET /user/getwordlist?user=ranjayzheng
     @route("/getwordlist")
     @POST()
@@ -48,7 +59,7 @@ export default class TestRouter {
         ctx.body = await this.userService.getWordList(username)
     }
 
-    // POST {title, date, content}
+    // POST {user, title, date, content}
     @route("/updatewords")
     @POST()
     async updateWords(ctx) {
