@@ -3,6 +3,7 @@
  * @author Ranjay
  */
 import Koa from 'koa'
+import bodyParser from 'koa-bodyparser'
 import assets from 'koa-static'
 import CONFIG from './config'
 import errorHandler from './middlewares/errorhandler'
@@ -18,6 +19,7 @@ import {
 } from 'awilix-koa'
 
 const app = new Koa()
+app.use(bodyParser());
 // 创建IoC容器
 const container = createContainer()
 //IoC实现，保证每一次的请求都是一个新实例
