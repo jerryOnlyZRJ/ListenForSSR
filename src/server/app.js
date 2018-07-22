@@ -19,8 +19,7 @@ import {
 } from 'awilix-koa'
 
 const app = new Koa()
-app.use(bodyParser());
-// 创建IoC容器
+app.use(bodyParser())
 const container = createContainer()
 //IoC实现，保证每一次的请求都是一个新实例
 app.use(scopePerRequest(container))

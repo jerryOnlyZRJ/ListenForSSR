@@ -32,7 +32,7 @@ let Mongodb = class Mongodb {
 		const db = await this.connect2db();
 		return new Promise((resolve, reject) => {
 			db.db('listenforuser').collection("users").find({
-				name: username
+				username
 			}).toArray(function (err, res) {
 				if (err) reject(err);
 				if (res && res[0]) {
@@ -87,7 +87,7 @@ let Mongodb = class Mongodb {
 		const db = await this.connect2db();
 		return new Promise((resolve, reject) => {
 			db.db('listenforuser').collection("users").find({
-				name: username
+				username
 			}).toArray(function (err, res) {
 				if (err) reject(err);
 				resolve(res[0].password);

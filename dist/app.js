@@ -44,7 +44,6 @@ const app = new _koa2.default(); /**
                                   */
 
 app.use((0, _koaBodyparser2.default)());
-// 创建IoC容器
 const container = (0, _awilix.createContainer)();
 //IoC实现，保证每一次的请求都是一个新实例
 app.use((0, _awilixKoa.scopePerRequest)(container));

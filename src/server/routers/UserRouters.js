@@ -41,7 +41,7 @@ export default class TestRouter {
     }
 
     // GET /user/iswordexists?user=ranjayzheng&title=test
-    @route("/getwordlist")
+    @route("/iswordexists")
     @POST()
     async isWordExists(ctx) {
         const {
@@ -53,7 +53,7 @@ export default class TestRouter {
 
     // GET /user/getwordlist?user=ranjayzheng
     @route("/getwordlist")
-    @POST()
+    @GET()
     async getWordList(ctx) {
         const username = ctx.request.query.user
         ctx.body = await this.userService.getWordList(username)

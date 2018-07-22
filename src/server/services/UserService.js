@@ -14,7 +14,7 @@ class UserService {
   }
 
   async register(username, password) {
-    const isUserExists = await this.isUserExists(username)
+    const isUserExists = await this.mongodb.isUserExists(username)
     if (isUserExists) {
       return {
         state: 2,
@@ -69,7 +69,7 @@ class UserService {
       content
     }
     const isWordExists = await this.mongodb.isWordExists(user, title)
-    if (isWordExists) {
+    if (!isWordExists) {
       return await this.mongodb.insertWord(user, wordOptions)
     } else {
       return await this.mongodb.updateWord(user, wordOptions)
