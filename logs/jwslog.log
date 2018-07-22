@@ -20,3 +20,19 @@
     at dispatch (/Users/ranjayzheng/Desktop/ListenForSSR/node_modules/koa-router/lib/router.js:351:31)
     at dispatch (/Users/ranjayzheng/Desktop/ListenForSSR/node_modules/koa-compose/index.js:42:32)
     at /Users/ranjayzheng/Desktop/ListenForSSR/node_modules/koa-compose/index.js:34:12
+[2018-07-22T16:21:06.152] [ERROR] cheese - TypeError: this.isUserExists is not a function
+    at UserService.register (/Users/ranjayzheng/Desktop/ListenForSSR/dist/services/UserService.js:23:37)
+    at TestRouter.register (/Users/ranjayzheng/Desktop/ListenForSSR/dist/routers/UserRouters.js:59:43)
+    at memberInvoker (/Users/ranjayzheng/Desktop/ListenForSSR/node_modules/awilix-koa/lib/invokers.js:80:45)
+    at dispatch (/Users/ranjayzheng/Desktop/ListenForSSR/node_modules/koa-router/node_modules/koa-compose/index.js:44:32)
+    at next (/Users/ranjayzheng/Desktop/ListenForSSR/node_modules/koa-router/node_modules/koa-compose/index.js:45:18)
+    at /Users/ranjayzheng/Desktop/ListenForSSR/node_modules/koa-router/lib/router.js:346:16
+    at dispatch (/Users/ranjayzheng/Desktop/ListenForSSR/node_modules/koa-router/node_modules/koa-compose/index.js:44:32)
+    at /Users/ranjayzheng/Desktop/ListenForSSR/node_modules/koa-router/node_modules/koa-compose/index.js:36:12
+    at dispatch (/Users/ranjayzheng/Desktop/ListenForSSR/node_modules/koa-router/lib/router.js:351:31)
+    at dispatch (/Users/ranjayzheng/Desktop/ListenForSSR/node_modules/koa-compose/index.js:42:32)
+[2018-07-22T16:26:03.254] [ERROR] cheese - { Error: ENOENT: no such file or directory, open '/Users/ranjayzheng/Desktop/ListenForSSR/dist/views/404.html'
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ranjayzheng/Desktop/ListenForSSR/dist/views/404.html' }

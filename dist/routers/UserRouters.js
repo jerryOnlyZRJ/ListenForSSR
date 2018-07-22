@@ -38,7 +38,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
     return desc;
 }
 
-let TestRouter = (_dec = (0, _awilixKoa.route)('/user'), _dec2 = (0, _awilixKoa.GET)(), _dec3 = (0, _awilixKoa.route)("/register"), _dec4 = (0, _awilixKoa.POST)(), _dec5 = (0, _awilixKoa.route)("/login"), _dec6 = (0, _awilixKoa.POST)(), _dec7 = (0, _awilixKoa.route)("/getwordlist"), _dec8 = (0, _awilixKoa.POST)(), _dec9 = (0, _awilixKoa.route)("/getwordlist"), _dec10 = (0, _awilixKoa.POST)(), _dec11 = (0, _awilixKoa.route)("/updatewords"), _dec12 = (0, _awilixKoa.POST)(), _dec(_class = (_class2 = class TestRouter {
+let TestRouter = (_dec = (0, _awilixKoa.route)('/user'), _dec2 = (0, _awilixKoa.GET)(), _dec3 = (0, _awilixKoa.route)("/register"), _dec4 = (0, _awilixKoa.POST)(), _dec5 = (0, _awilixKoa.route)("/login"), _dec6 = (0, _awilixKoa.POST)(), _dec7 = (0, _awilixKoa.route)("/iswordexists"), _dec8 = (0, _awilixKoa.POST)(), _dec9 = (0, _awilixKoa.route)("/getwordlist"), _dec10 = (0, _awilixKoa.GET)(), _dec11 = (0, _awilixKoa.route)("/updatewords"), _dec12 = (0, _awilixKoa.POST)(), _dec(_class = (_class2 = class TestRouter {
     constructor({
         userService
     }) {

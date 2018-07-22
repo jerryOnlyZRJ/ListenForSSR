@@ -8,6 +8,10 @@ var _koa = require('koa');
 
 var _koa2 = _interopRequireDefault(_koa);
 
+var _koaBodyparser = require('koa-bodyparser');
+
+var _koaBodyparser2 = _interopRequireDefault(_koaBodyparser);
+
 var _koaStatic = require('koa-static');
 
 var _koaStatic2 = _interopRequireDefault(_koaStatic);
@@ -34,11 +38,12 @@ var _awilixKoa = require('awilix-koa');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * @description node层启动文件
- * @author Ranjay
- */
-const app = new _koa2.default();
+const app = new _koa2.default(); /**
+                                  * @description node层启动文件
+                                  * @author Ranjay
+                                  */
+
+app.use((0, _koaBodyparser2.default)());
 // 创建IoC容器
 const container = (0, _awilix.createContainer)();
 //IoC实现，保证每一次的请求都是一个新实例

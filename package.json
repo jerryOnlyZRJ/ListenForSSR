@@ -53,6 +53,7 @@
 		"axios": "^0.18.0",
 		"co": "^4.6.0",
 		"koa": "^2.5.1",
+		"koa-bodyparser": "^4.2.1",
 		"koa-router": "^7.4.0",
 		"koa-static": "^4.0.3",
 		"koa-swig": "^2.2.1",
