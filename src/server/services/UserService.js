@@ -2,36 +2,58 @@
  * @description index数据拉取模块
  * @author Jerry
  */
-import mongodb from 'mongodb'
+import Mongodb from './Mongodb.js'
 
 /**
  * UserService
  * @type {Class}
  */
-class UserService {\
-  connect2db() {
-    const MongoClient = mongodb.MongoClient;
-    const url = 'mongodb://localhost:27017';
-    return new Promise((resolve, reject) => {
-      MongoClient.connect(url, {
-        useNewUrlParser: true
-      }, function(err, db) {
-        if (err) reject(err)
-        resolve(db)
-      });
-    })
+class UserService {
+  constructor() {
+    this.mongodb = new Mongodb()
   }
-  checkPassword() {
 
+  async register(username, password) {
+    const isUserExists = await this.isUserExists(username)
+    if (isUserExists) {
+      return {
+        state: 2,
+        msg: "用户名已存在"
+      }
+    } else {
+      return await this.mongodb.insertUser(username, password)
+    }
   }
-  register() {
 
+  async checkPassword(username, password) {
+    const isUserExists = await this.mongodb.isUserExists(username)
+    if (!isUserExists) {
+      return {
+        state: 2,
+        msg: "用户不存在"
+      }
+    } else {
+      const pw = await this.mongodb.getPassword(username)
+      if (password === pw) {
+        return {
+          state: 0,
+          msg: "登录成功！"
+        }
+      } else {
+        return {
+          state: 1,
+          "msg": "密码错误！"
+        }
+      }
+    }
   }
-  getWordList() {
 
+  async getWordList(username) {
+    return await this.mongodb.getWordList(username)
   }
-  updateWords() {
 
+  updateWords(updateOptions) {
+    return await this.mongodb.updateWords(updateOptions)
   }
 }
 
