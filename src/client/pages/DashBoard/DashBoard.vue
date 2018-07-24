@@ -8,7 +8,8 @@
             <div class="mui-input-row mui-search">
                 <input type="search" class="mui-input-clear" @input="filterWordList" placeholder="您可以搜索已存在的文档~">
             </div>
-            <ul class="word-list">
+            <div v-if="withoutWordItem" class="empty-info"><span>文档列表空空如也,</span><span>快点击右上角添加文档吧~</span></div>
+            <ul v-else class="word-list">
                 <li v-for="(item, key) in filterList" :key="key" class="word-item" @click="choiceWord(item, $event)">
                     <div class="word-title">{{item.title}}</div>
                     <div class="modified-date">{{ arrageDate(item.date) }}</div>
@@ -50,6 +51,11 @@ export default {
             this.orginList = res.data
             this.filterList = res.data
         })
+    },
+    computed: {
+      withoutWordItem(){
+        return !this.orginList.toString()
+      }
     },
     methods: {
         arrageDate(dateStr) {
