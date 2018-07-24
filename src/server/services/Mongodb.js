@@ -93,7 +93,9 @@ class Mongodb {
 	async getWordList(username) {
 		const db = await this.connect2db()
 		return new Promise((resolve, reject) => {
-			db.db('listenfordata').collection(username).find().toArray(function(err, res) {
+			db.db('listenfordata').collection(username).find().sort({
+				date: -1
+			}).toArray(function(err, res) {
 				if (err) reject(err)
 				resolve(res)
 				db.close();

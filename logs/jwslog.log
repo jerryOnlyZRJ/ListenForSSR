@@ -221,3 +221,44 @@
   code: 'ENOENT',
   syscall: 'open',
   path: 'F:\\workspaces\\ListenFor\\dist\\views\\404.html' }
+[2018-07-24T17:19:37.652] [ERROR] cheese - ReferenceError: Quill is not defined
+    at eval (webpack:///./src/client/pages/Editor/quill.js?:6:12)
+    at Object../src/client/pages/Editor/quill.js (scripts/main.bundle.js:1012:1)
+    at __webpack_require__ (scripts/main.bundle.js:21:30)
+    at eval (webpack:///./src/client/pages/Editor/Editor.vue?./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options:7:1)
+    at Object../node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/client/pages/Editor/Editor.vue?vue&type=script&lang=js (scripts/main.bundle.js:444:1)
+    at __webpack_require__ (scripts/main.bundle.js:21:30)
+    at eval (webpack:///./src/client/pages/Editor/Editor.vue?:2:188)
+    at Module../src/client/pages/Editor/Editor.vue?vue&type=script&lang=js (scripts/main.bundle.js:976:1)
+    at __webpack_require__ (scripts/main.bundle.js:21:30)
+    at eval (webpack:///./src/client/pages/Editor/Editor.vue?:3:93)
+[2018-07-24T17:19:37.780] [ERROR] cheese - { Error: ENOENT: no such file or directory, open 'F:\workspaces\ListenFor\dist\views\404.html'
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\workspaces\\ListenFor\\dist\\views\\404.html' }
+[2018-07-24T18:45:33.820] [ERROR] cheese - { MongoNetworkError: failed to connect to server [localhost:27017] on first connect [MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017]
+    at Pool.<anonymous> (F:\workspaces\ListenFor\node_modules\mongodb-core\lib\topologies\server.js:562:11)
+    at emitOne (events.js:116:13)
+    at Pool.emit (events.js:211:7)
+    at Connection.<anonymous> (F:\workspaces\ListenFor\node_modules\mongodb-core\lib\connection\pool.js:316:12)
+    at Object.onceWrapper (events.js:317:30)
+    at emitTwo (events.js:126:13)
+    at Connection.emit (events.js:214:7)
+    at Socket.<anonymous> (F:\workspaces\ListenFor\node_modules\mongodb-core\lib\connection\connection.js:245:50)
+    at Object.onceWrapper (events.js:315:30)
+    at emitOne (events.js:116:13)
+  name: 'MongoNetworkError',
+  message: 'failed to connect to server [localhost:27017] on first connect [MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017]',
+  errorLabels: [ 'TransientTransactionError' ],
+  [Symbol(mongoErrorContextSymbol)]: {} }
+[2018-07-24T18:45:51.710] [ERROR] cheese - { Error: ENOENT: no such file or directory, open 'F:\workspaces\ListenFor\dist\views\404.html'
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\workspaces\\ListenFor\\dist\\views\\404.html' }
+[2018-07-24T18:45:51.823] [ERROR] cheese - { Error: ENOENT: no such file or directory, open 'F:\workspaces\ListenFor\dist\views\404.html'
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\workspaces\\ListenFor\\dist\\views\\404.html' }

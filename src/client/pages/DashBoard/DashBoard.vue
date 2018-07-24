@@ -6,23 +6,13 @@
         </header>
         <div class="mui-content">
             <div class="mui-input-row mui-search">
-                <input type="search" class="mui-input-clear" placeholder="您可以搜索已存在的文档~">
+                <input type="search" class="mui-input-clear" @input="filterWordList" placeholder="您可以搜索已存在的文档~">
             </div>
             <ul class="word-list">
-                <li class="word-item">
-                    <div class="word-title">test</div>
-                    <div class="modified-date">2018年9月8日15:13</div>
-                    <div class="word-content">今天我们对现阶段商业的形式进行了简单的评估，就现阶段在线文档的发展形势而言</div>
-                </li>
-                <li class="word-item">
-                    <div class="word-title">test</div>
-                    <div class="modified-date">2018年9月8日15:13</div>
-                    <div class="word-content">今天我们对现阶段商业的形式进行了简单的评估，就现阶段在线文档的发展形势而言</div>
-                </li>
-                <li class="word-item">
-                    <div class="word-title">test</div>
-                    <div class="modified-date">2018年9月8日15:13</div>
-                    <div class="word-content">今天我们对现阶段商业的形式进行了简单的评估，就现阶段在线文档的发展形势而言</div>
+                <li v-for="(item, key) in filterList" :key="key" class="word-item" @click="choiceWord(item, $event)">
+                    <div class="word-title">{{item.title}}</div>
+                    <div class="modified-date">{{ arrageDate(item.date) }}</div>
+                    <div class="word-content">{{ getWordTextContent(item.content) }}</div>
                 </li>
             </ul>
         </div>
@@ -31,10 +21,10 @@
             <div class="mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <ul class="mui-table-view">
-                        <li class="mui-table-view-cell">
+                        <li class="mui-table-view-cell" @click="makeAnewWord">
                             <a href="#">新建文档</a>
                         </li>
-                        <li class="mui-table-view-cell">
+                        <li class="mui-table-view-cell" @click="quitLogin">
                             <a href="#">退出登录</a>
                         </li>
                     </ul>
@@ -48,29 +38,78 @@ import request from 'axios'
 
 export default {
     name: 'DashBoard',
-    data(){
+    data() {
         return {
-            wordList: []
+            orginList: [],
+            filterList: []
         }
     },
-    mounted(){
+    mounted() {
         const username = localStorage.getItem('username')
         request.get(`/user/getwordlist?user=${username}`).then(res => {
-            this.wordList = res.data
+            this.orginList = res.data
+            this.filterList = res.data
         })
     },
     methods: {
-        getWordTextContent(content){
-
+        arrageDate(dateStr) {
+            const date = new Date(dateStr)
+            const year = date.getFullYear()
+            const month = date.getMonth() + 1
+            const day = date.getDate()
+            const hour = date.getHours()
+            let min = date.getMinutes()
+            min = min < 10 ? '0' + min : min
+            return `${year}年${month}月${day}日${hour}:${min}`
         },
-        filterWordList(){
-
+        getWordTextContent(content) {
+            const contentObj = JSON.parse(content)
+            return content.ops.map(item => {
+                return item.insert.replace(/\n/g, '')
+            }).join('')
         },
-        makeAnewWord(){
-
+        filterWordList(e) {
+            const keyword = e.target.value
+            this.filterList = this.orginList.filter(item => {
+                return item.indexOf(keyword) >= 0 ? true : false
+            })
         },
-        quitLogin(){
-            
+        makeAnewWord(event) {
+            event.detail.gesture.preventDefault()
+            const btnArray = ['确定', '取消']
+            const orginList2Set = new Set(this.orginList)
+            mui.prompt('您可以为您的新文档起个名字：', '工作日志', '创建文档', btnArray, function(e) {
+                if (!e.index) {
+                    if (orginList2Set.has(e.value)) {
+                        mui.alert('文档已存在', '创建失败')
+                    } else {
+                        mui.toast('创建成功')
+                        setTimeout(() => {
+                            localStorage.setItem('title', e.value)
+                            localStorage.removeItem('content')
+                            mui.openWindow({
+                                url: '/editor',
+                                id: 'editor'
+                            })
+                        }, 500)
+                    }
+                }
+            })
+        },
+        quitLogin() {
+            //TODOS：增加后台cookie控制登录态
+            mui.openWindow({
+                url: '/',
+                id: 'login'
+            })
+        },
+        choiceWord(item, event) {
+            localStorage.setItem('title', item.title)
+            localStorage.setItem('content', item.content)
+            mui.openWindow({
+                url: '/editor',
+                id: 'editor'
+            })
         }
     }
 }

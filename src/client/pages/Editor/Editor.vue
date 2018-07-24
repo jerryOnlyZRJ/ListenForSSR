@@ -9,7 +9,7 @@
             <div class="mui-scroll-wrapper">
                 <div class="mui-scroll">
                     <ul class="mui-table-view">
-                        <li class="mui-table-view-cell">
+                        <li class="mui-table-view-cell" @click="uploadUserWord">
                             <a href="#">云存储</a>
                         </li>
                     </ul>
@@ -19,64 +19,123 @@
         <div class="mui-content">
             <div id="quill-container"></div>
         </div>
-        <div class="speech-btn mui-icon mui-icon-mic"></div>
+        <div class="speech-btn mui-icon mui-icon-mic" @click="speechHandler"></div>
+        <RemoteJs src="https://cdn.bootcss.com/quill/1.3.6/quill.min.js"></RemoteJs>
     </div>
 </template>
 <script>
-// import Quill from 'quill'
+import request from 'axios'
 
 export default {
     name: 'Editor',
+    components: {
+        'RemoteJs': {
+            render(createElement) {
+                return createElement('script', {
+                    attrs: {
+                        type: 'text/javascript',
+                        src: this.src
+                    }
+                })
+            },
+            props: {
+                src: {
+                    type: String,
+                    required: true
+                }
+            }
+        }
+    },
     data: () => {
         return {
             title: ''
         }
     },
+    mounted() {
+        //editor配置
+        //初始化字体
+        const fonts = [false, 'SimSun', 'SimHei', 'Microsoft-YaHei', 'KaiTi', 'FangSong', 'Arial', 'Times-New-Roman'];
+        const Font = Quill.import('formats/font');
+        Font.whitelist = fonts;
+        Quill.register(Font, true);
+        //初始化字号
+        const sizes = [false, "3.5rem", "3rem", "2.125rem", "2rem", "1.8125rem", "1.5rem", "1.3125rem", "1.25rem", "1.125rem", "1rem", "0.875rem", "0.75rem", "0.625rem", "0.5rem", "0.4375rem", "0.375rem"]
+        const Size = Quill.import('attributors/style/size');
+        Size.whitelist = sizes;
+        Quill.register(Size, true);
+        const toolbarOptions = [
+            [{
+                'font': fonts
+            }, {
+                'size': sizes
+            }],
+            ['bold', 'italic', 'underline', {
+                'color': []
+            }, {
+                'background': []
+            }],
+            [{
+                'list': 'ordered'
+            }, {
+                'list': 'bullet'
+            }, {
+                'direction': 'rtl'
+            }, {
+                'align': []
+            }]
+        ]
+        const quill = new Quill('#quill-container', {
+            modules: {
+                toolbar: toolbarOptions
+            },
+            theme: 'snow'
+        });
+        window.quill = quill
+        //初始化文档
+        this.title = localStorage.getItem('title')
+        const content = localStorage.getItem('content')
+        if (content) {
+            quill.setContents(JSON.parse(content))
+        }
+        window.onbeforeunload = () => {
+            if (localStorage.getItem('content')) {
+                this.uploadUserWord()
+            }
+        }
+    },
     methods: {
-        uploadUserWord(){
-            
+        speechHandler(e) {
+            if (e.target.dataset.state === 'stop') {
+                this.startRecognize()
+                speechBtn.dataset.state = 'speeching'
+            } else {
+                this.stopRecognize()
+                speechBtn.dataset.state = 'stop'
+            }
+        },
+        startRecognize() {
+            const options = {
+                engine: 'iFly',
+                lang: 'zh-cn',
+                continue: true
+            };
+            plus.speech.startRecognize(options, function(res) {
+                quill.insertText(quill.getLength(), res, quill.getFormat())
+            }, function(e) {
+                console.log(e)
+            });
+        },
+        stopRecognize() {
+            plus.speech.stopRecognize();
+        },
+        uploadUserWord() {
+            const user = localStorage.getItem('username')
+            const title = this.title
+            const content = JSON.stringify(quill.getContents())
+            const date = (new Date()).toString()
+            request.post('/user/updatewords', { user, title, date, content }).catch(err => console.log(err))
         }
     }
-//     mounted() {
-//         //editor配置
-//         //初始化字体
-//         const fonts = [false, 'SimSun', 'SimHei', 'Microsoft-YaHei', 'KaiTi', 'FangSong', 'Arial', 'Times-New-Roman'];
-//         const Font = Quill.import('formats/font');
-//         Font.whitelist = fonts;
-//         Quill.register(Font, true);
-//         //初始化字号
-//         const sizes = [false, "3.5rem", "3rem", "2.125rem", "2rem", "1.8125rem", "1.5rem", "1.3125rem", "1.25rem", "1.125rem", "1rem", "0.875rem", "0.75rem", "0.625rem", "0.5rem", "0.4375rem", "0.375rem"]
-//         const Size = Quill.import('attributors/style/size');
-//         Size.whitelist = sizes;
-//         Quill.register(Size, true);
-//         const toolbarOptions = [
-//             [{
-//                 'font': fonts
-//             }, {
-//                 'size': sizes
-//             }],
-//             ['bold', 'italic', 'underline', {
-//                 'color': []
-//             }, {
-//                 'background': []
-//             }],
-//             [{
-//                 'list': 'ordered'
-//             }, {
-//                 'list': 'bullet'
-//             }, {
-//                 'direction': 'rtl'
-//             }, {
-//                 'align': []
-//             }]
-//         ]
-//         const quill = new Quill('#quill-container', {
-//             modules: {
-//                 toolbar: toolbarOptions
-//             },
-//             theme: 'snow'
-//         });
-//     }
 }
 </script>
 <style>
@@ -128,6 +187,13 @@ export default {
 .mui-popover .mui-popover-arrow {
     left: 64px;
 }
+
+
+
+
+
+
+
 
 
 /*font styles*/
@@ -214,6 +280,13 @@ export default {
 .ql-font-sans-serif {
     font-family: "sans-serif";
 }
+
+
+
+
+
+
+
 
 
 /*字号*/
