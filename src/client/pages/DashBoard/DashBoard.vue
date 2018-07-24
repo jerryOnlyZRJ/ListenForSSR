@@ -53,9 +53,9 @@ export default {
         })
     },
     computed: {
-      withoutWordItem(){
-        return !this.orginList.toString()
-      }
+        withoutWordItem() {
+            return !this.orginList.toString()
+        }
     },
     methods: {
         arrageDate(dateStr) {
@@ -70,9 +70,13 @@ export default {
         },
         getWordTextContent(content) {
             const contentObj = JSON.parse(content)
-            return content.ops.map(item => {
-                return item.insert.replace(/\n/g, '')
-            }).join('')
+            if (content.ops) {
+                return content.ops.map(item => {
+                    return item.insert.replace(/\n/g, '')
+                }).join('')
+            }else {
+              return ''
+            }
         },
         filterWordList(e) {
             const keyword = e.target.value
@@ -131,6 +135,13 @@ export default {
 
 .mui-popover .mui-popover-arrow {
     left: 5rem;
+}
+
+.empty-info {
+    display: flex;
+    flex-direction: column;
+    color: #929292;
+    align-items: center;
 }
 
 .word-list {
