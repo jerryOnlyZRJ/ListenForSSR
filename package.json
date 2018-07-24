@@ -12,7 +12,8 @@
 		"client:ssr-dev": "npm run client:dev && npm run client:server-dev",
 		"client:ssr-prod": "npm run client:prod && npm run client:server-prod",
 		"server": "gulp",
-		"start:dev": "supervisor dist/app.js"
+		"start:dev": "supervisor dist/app.js",
+		"start": "pm2 start pm2.json"
 	},
 	"author": "Ranjay Zheng",
 	"license": "ISC",
