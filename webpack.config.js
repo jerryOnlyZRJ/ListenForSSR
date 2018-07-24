@@ -17,9 +17,14 @@ const _mode = argv.mode || "development";
 let _mergeConfig = "";
 if (argv.env == "server") {
   _mergeConfig = require(`./config/webpack.server.js`);
+  _mergeConfig.plugins.push(new CleanWebpackPlugin(['dist/assets/vue-ssr-server-bundle.json'], {
+    root: __dirname,
+    verbose: true,
+    dry: false
+  }))
 } else {
   _mergeConfig = require(`./config/webpack.${_mode}.js`);
-  _mergeConfig.plugins.push(new CleanWebpackPlugin(['dist/assets/scripts', 'dist/assets/styles'], {
+  _mergeConfig.plugins.push(new CleanWebpackPlugin(['dist/assets/scripts', 'dist/assets/styles', 'dist/assets/images', 'dist/assets/vue-ssr-client-manifest.json'], {
     root: __dirname,
     verbose: true,
     dry: false

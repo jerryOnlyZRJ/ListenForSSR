@@ -24,7 +24,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 let IndexService = class IndexService {
   constructor() {}
   async init(ctx) {
-    _path2.default.join(__dirname);
     const serverBundle = require(_path2.default.join(__dirname, '../assets/vue-ssr-server-bundle.json'));
     const clientManifest = require(_path2.default.join(__dirname, '../assets/vue-ssr-client-manifest.json'));
     const template = _fs2.default.readFileSync(_path2.default.join(__dirname, '../assets/index.html'), 'utf-8');
