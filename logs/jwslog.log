@@ -126,3 +126,98 @@
   code: 'ENOENT',
   syscall: 'open',
   path: 'F:\\workspaces\\ListenFor\\dist\\views\\404.html' }
+[2018-07-24T15:05:45.978] [ERROR] cheese - { MongoNetworkError: failed to connect to server [localhost:27017] on first connect [MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017]
+    at Pool.<anonymous> (F:\workspaces\ListenFor\node_modules\mongodb-core\lib\topologies\server.js:562:11)
+    at emitOne (events.js:116:13)
+    at Pool.emit (events.js:211:7)
+    at Connection.<anonymous> (F:\workspaces\ListenFor\node_modules\mongodb-core\lib\connection\pool.js:316:12)
+    at Object.onceWrapper (events.js:317:30)
+    at emitTwo (events.js:126:13)
+    at Connection.emit (events.js:214:7)
+    at Socket.<anonymous> (F:\workspaces\ListenFor\node_modules\mongodb-core\lib\connection\connection.js:245:50)
+    at Object.onceWrapper (events.js:315:30)
+    at emitOne (events.js:116:13)
+  name: 'MongoNetworkError',
+  message: 'failed to connect to server [localhost:27017] on first connect [MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017]',
+  errorLabels: [ 'TransientTransactionError' ],
+  [Symbol(mongoErrorContextSymbol)]: {} }
+[2018-07-24T15:16:32.427] [ERROR] cheese - ReferenceError: document is not defined
+    at Object.DIFF_DELETE (webpack:///./node_modules/quill/dist/quill.js?:7583:12)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:975:1)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:5577:14)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:9967:13)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.eval (webpack:///./node_modules/quill/dist/quill.js?:11479:18)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+[2018-07-24T15:16:32.564] [ERROR] cheese - { Error: ENOENT: no such file or directory, open 'F:\workspaces\ListenFor\dist\views\404.html'
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\workspaces\\ListenFor\\dist\\views\\404.html' }
+[2018-07-24T15:17:26.347] [ERROR] cheese - ReferenceError: document is not defined
+    at Object.DIFF_DELETE (webpack:///./node_modules/quill/dist/quill.js?:7583:12)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:975:1)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:5577:14)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:9967:13)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.eval (webpack:///./node_modules/quill/dist/quill.js?:11479:18)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+[2018-07-24T15:17:26.437] [ERROR] cheese - { Error: ENOENT: no such file or directory, open 'F:\workspaces\ListenFor\dist\views\404.html'
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\workspaces\\ListenFor\\dist\\views\\404.html' }
+[2018-07-24T15:17:29.462] [ERROR] cheese - ReferenceError: document is not defined
+    at Object.DIFF_DELETE (webpack:///./node_modules/quill/dist/quill.js?:7583:12)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:975:1)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:5577:14)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:9967:13)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.eval (webpack:///./node_modules/quill/dist/quill.js?:11479:18)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+[2018-07-24T15:17:29.528] [ERROR] cheese - { Error: ENOENT: no such file or directory, open 'F:\workspaces\ListenFor\dist\views\404.html'
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\workspaces\\ListenFor\\dist\\views\\404.html' }
+[2018-07-24T15:23:07.399] [ERROR] cheese - ReferenceError: document is not defined
+    at Object.DIFF_DELETE (webpack:///./node_modules/quill/dist/quill.js?:7583:12)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:975:1)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:5577:14)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:9967:13)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.eval (webpack:///./node_modules/quill/dist/quill.js?:11479:18)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+[2018-07-24T15:23:07.513] [ERROR] cheese - { Error: ENOENT: no such file or directory, open 'F:\workspaces\ListenFor\dist\views\404.html'
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\workspaces\\ListenFor\\dist\\views\\404.html' }
+[2018-07-24T15:23:52.230] [ERROR] cheese - ReferenceError: document is not defined
+    at Object.DIFF_DELETE (webpack:///./node_modules/quill/dist/quill.js?:7583:12)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:975:1)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:5577:14)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.defineProperty.value (webpack:///./node_modules/quill/dist/quill.js?:9967:13)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+    at Object.eval (webpack:///./node_modules/quill/dist/quill.js?:11479:18)
+    at __webpack_require__ (webpack:///./node_modules/quill/dist/quill.js?:31:30)
+[2018-07-24T15:23:52.297] [ERROR] cheese - { Error: ENOENT: no such file or directory, open 'F:\workspaces\ListenFor\dist\views\404.html'
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'F:\\workspaces\\ListenFor\\dist\\views\\404.html' }
