@@ -44,8 +44,35 @@
     </div>
 </template>
 <script>
+import request from 'axios'
+
 export default {
-    name: 'DashBoard'
+    name: 'DashBoard',
+    data(){
+        return {
+            wordList: []
+        }
+    },
+    mounted(){
+        const username = localStorage.getItem('username')
+        request.get(`/user/getwordlist?user=${username}`).then(res => {
+            this.wordList = res.data
+        })
+    },
+    methods: {
+        getWordTextContent(content){
+
+        },
+        filterWordList(){
+
+        },
+        makeAnewWord(){
+
+        },
+        quitLogin(){
+            
+        }
+    }
 }
 </script>
 <style scoped>

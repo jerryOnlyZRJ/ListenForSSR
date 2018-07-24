@@ -31,6 +31,11 @@ export default {
         return {
             title: ''
         }
+    },
+    methods: {
+        uploadUserWord(){
+            
+        }
     }
 //     mounted() {
 //         //editor配置
