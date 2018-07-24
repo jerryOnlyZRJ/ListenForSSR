@@ -14,7 +14,7 @@
                 </div>
                 <div class="password-container">
                     <input type="password" ref="passwordInput" name="" id="password-input" placeholder="密码" />
-                    <span class="mui-icon mui-icon-eye login-pwdToggle"></span>
+                    <span class="mui-icon mui-icon-eye login-pwdToggle" @click="pwdToggle"></span>
                 </div>
             </div>
             <button type="button" class="mui-btn mui-btn-blue mui-btn-block login-btn" @click="loginHandler">登录</button>
@@ -71,6 +71,14 @@ export default {
                 url: '/register',
                 id: 'register'
             })
+        },
+        pwdToggle(e) {
+            e.target.classList.toggle('active')
+            if (e.target.classList.contains('active')) {
+                e.target.parentNode.firstElementChild.type = 'text'
+            } else {
+                e.target.parentNode.firstElementChild.type = 'password'
+            }
         }
     }
 }
