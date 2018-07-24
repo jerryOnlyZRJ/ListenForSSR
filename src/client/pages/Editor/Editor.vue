@@ -133,7 +133,13 @@ export default {
             const title = this.title
             const content = JSON.stringify(quill.getContents())
             const date = (new Date()).toString()
-            request.post('/user/updatewords', { user, title, date, content }).catch(err => console.log(err))
+            request.post('/user/updatewords', { user, title, date, content }).then(res => {
+                mui.toast('上传成功')
+                mui.openWindow({
+                    url: '/dashboard',
+                    id: 'dashboard'
+                })
+            }).catch(err => console.log(err))
         }
     }
 }
@@ -187,6 +193,8 @@ export default {
 .mui-popover .mui-popover-arrow {
     left: 64px;
 }
+
+
 
 
 
@@ -280,6 +288,8 @@ export default {
 .ql-font-sans-serif {
     font-family: "sans-serif";
 }
+
+
 
 
 
