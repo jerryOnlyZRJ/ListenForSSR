@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const argv = require('yargs-parser')(process.argv.slice(2));
 const merge = require('webpack-merge');
@@ -45,7 +46,10 @@ let generalConfig = {
     ]
   },
   resolve: {
-    extensions: [".js", ".css", ".vue"]
+    extensions: [".js", ".css", ".vue"],
+    alias: {
+      '@': path.resolve('src')
+    }
   },
   watch: false,
   watchOptions: {
@@ -105,7 +109,11 @@ let generalConfig = {
     new MiniCssExtractPlugin({
       filename: 'styles/[name]-[hash:5].css',
       chunkFilename: "styles/[id]-[hash:5].css"
-    })
+    }),
+    new CopyWebpackPlugin([{
+      from: path.join(__dirname, 'favicon.ico'),
+      to: path.join(__dirname, '/dist/assets/images')
+    }])
   ]
 }
 

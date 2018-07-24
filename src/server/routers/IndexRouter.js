@@ -9,7 +9,9 @@ import path from 'path'
 import LRU from 'lru-cache'
 
 @route('/')
-@route('/helloworld')
+@route('/dashboard')
+@route('/editor')
+@route('/register')
 export default class IndexRouter {
     constructor({
         indexService

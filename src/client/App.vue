@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <div class="main">
-      
+       <router-link to="/">Go to index</router-link>
+       <router-link to="/dashboard">Go to dashboard</router-link>
+       <router-link to="/editor">Go to editor</router-link>
+       <router-link to="/register">Go to register</router-link>
+       <router-view></router-view>
     </div>
   </div>
 </template>
@@ -32,12 +36,4 @@ a {
   text-align: center;
   color: #2c3e50;
 }
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 </style>

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2;
+var _dec, _dec2, _dec3, _dec4, _dec5, _class, _desc, _value, _class2;
 
 var _awilixKoa = require('awilix-koa');
 
@@ -52,7 +52,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
     return desc;
 }
 
-let IndexRouter = (_dec = (0, _awilixKoa.route)('/'), _dec2 = (0, _awilixKoa.route)('/helloworld'), _dec3 = (0, _awilixKoa.GET)(), _dec(_class = _dec2(_class = (_class2 = class IndexRouter {
+let IndexRouter = (_dec = (0, _awilixKoa.route)('/'), _dec2 = (0, _awilixKoa.route)('/dashboard'), _dec3 = (0, _awilixKoa.route)('/editor'), _dec4 = (0, _awilixKoa.route)('/register'), _dec5 = (0, _awilixKoa.GET)(), _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = (_class2 = class IndexRouter {
     constructor({
         indexService
     }) {
@@ -63,5 +63,5 @@ let IndexRouter = (_dec = (0, _awilixKoa.route)('/'), _dec2 = (0, _awilixKoa.rou
         await this.indexService.init(ctx);
     }
 
-}, (_applyDecoratedDescriptor(_class2.prototype, 'getIndex', [_dec3], Object.getOwnPropertyDescriptor(_class2.prototype, 'getIndex'), _class2.prototype)), _class2)) || _class) || _class);
+}, (_applyDecoratedDescriptor(_class2.prototype, 'getIndex', [_dec5], Object.getOwnPropertyDescriptor(_class2.prototype, 'getIndex'), _class2.prototype)), _class2)) || _class) || _class) || _class) || _class);
 exports.default = IndexRouter;
