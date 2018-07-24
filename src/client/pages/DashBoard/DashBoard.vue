@@ -86,7 +86,7 @@ export default {
         },
         makeAnewWord(event) {
             const btnArray = ['确定', '取消']
-            const orginList2Set = new Set(this.orginList)
+            const orginList2Set = new Set(this.orginList.map(item => item.title))
             mui.prompt('您可以为您的新文档起个名字：', '工作日志', '创建文档', btnArray, function(e) {
                 if (!e.index) {
                     if (orginList2Set.has(e.value)) {
