@@ -81,7 +81,7 @@ export default {
         filterWordList(e) {
             const keyword = e.target.value
             this.filterList = this.orginList.filter(item => {
-                return item.indexOf(keyword) >= 0 ? true : false
+                return item.title.indexOf(keyword) >= 0 ? true : false
             })
         },
         makeAnewWord(event) {
