@@ -25,6 +25,7 @@
 </template>
 <script>
 import request from 'axios'
+import md5 from 'blueimp-md5'
 
 export default {
     name: 'Register',

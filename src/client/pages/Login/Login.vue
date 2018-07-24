@@ -28,11 +28,14 @@ import md5 from 'blueimp-md5'
 
 export default {
     name: 'Login',
-    mounted(){
-      const username = sessionStorage.getItem('username')
-      if(username){
-        this.$refs.usernameInput.value = username
-      }
+    mounted() {
+        const usernameSession = sessionStorage.getItem('username')
+        const usernameLocal = localStorage.getItem('username')
+        if (usernameSession) {
+            this.$refs.usernameInput.value = usernameSession
+        } else if (usernameLocal) {
+            this.$refs.usernameInput.value = usernameLocal
+        }
     },
     methods: {
         loginHandler() {
@@ -50,7 +53,7 @@ export default {
                 }).then(res => {
                     if (!res.data.state) {
                         mui.toast('登录成功')
-                        this.$store.dispatch('setUser', username)
+                        localStorage.setItem('username', username)
                         setTimeout(() => {
                             mui.openWindow({
                                 url: '/dashboard',
