@@ -122,7 +122,7 @@ export default {
 }
 
 .register-btn {
-    position: fixed;
+    position: absolute;
     bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);
