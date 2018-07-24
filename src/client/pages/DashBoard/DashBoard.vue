@@ -85,7 +85,6 @@ export default {
             })
         },
         makeAnewWord(event) {
-            event.detail.gesture.preventDefault()
             const btnArray = ['确定', '取消']
             const orginList2Set = new Set(this.orginList)
             mui.prompt('您可以为您的新文档起个名字：', '工作日志', '创建文档', btnArray, function(e) {
