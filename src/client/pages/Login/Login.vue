@@ -29,6 +29,19 @@ import md5 from 'blueimp-md5'
 export default {
     name: 'Login',
     mounted() {
+        const documentHeight = document.documentElement.clientHeight
+        const registerBtn = document.querySelector('.register-btn')
+        if (documentHeight > 550) {
+            registerBtn.style.zIndex = 1
+        }
+        window.addEventListener('resize', () => {
+            const documentHeight = document.documentElement.clientHeight
+            if (documentHeight <= 550) {
+                registerBtn.style.zIndex = -1
+            } else {
+                registerBtn.style.zIndex = 1
+            }
+        })
         const usernameSession = sessionStorage.getItem('username')
         const usernameLocal = localStorage.getItem('username')
         if (usernameSession) {
@@ -56,7 +69,7 @@ export default {
                         localStorage.setItem('username', username)
                         setTimeout(() => {
                             mui.openWindow({
-                                url: '/dashboard',
+                                url: 'http://139.199.72.216/dashboard',
                                 id: 'dashboard'
                             })
                         }, 1000)
@@ -68,7 +81,7 @@ export default {
         },
         registerHandler() {
             mui.openWindow({
-                url: '/register',
+                url: 'http://139.199.72.216/register',
                 id: 'register'
             })
         },
@@ -85,6 +98,7 @@ export default {
 </script>
 <style scoped>
 .mui-content {
+    position: relative;
     background: #fff;
 }
 
@@ -130,7 +144,7 @@ export default {
 }
 
 .register-btn {
-    position: fixed;
+    position: absolute;
     bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);

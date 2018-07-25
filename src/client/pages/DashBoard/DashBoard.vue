@@ -97,7 +97,7 @@ export default {
                             localStorage.setItem('title', e.value)
                             localStorage.removeItem('content')
                             mui.openWindow({
-                                url: '/editor',
+                                url: 'http://139.199.72.216/editor',
                                 id: 'editor'
                             })
                         }, 500)
@@ -108,7 +108,7 @@ export default {
         quitLogin() {
             //TODOS：增加后台cookie控制登录态
             mui.openWindow({
-                url: '/',
+                url: 'http://139.199.72.216/',
                 id: 'login'
             })
         },
@@ -116,7 +116,7 @@ export default {
             localStorage.setItem('title', item.title)
             localStorage.setItem('content', item.content)
             mui.openWindow({
-                url: '/editor',
+                url: 'http://139.199.72.216/editor',
                 id: 'editor'
             })
         }

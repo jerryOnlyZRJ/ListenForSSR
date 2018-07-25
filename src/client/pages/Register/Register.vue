@@ -51,7 +51,7 @@ export default {
                         sessionStorage.setItem('username', username)
                         setTimeout(() => {
                             mui.openWindow({
-                                url: '/',
+                                url: 'http://139.199.72.216/',
                                 id: 'login'
                             })
                         }, 1000)

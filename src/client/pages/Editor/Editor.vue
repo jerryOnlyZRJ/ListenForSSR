@@ -19,7 +19,7 @@
         <div class="mui-content">
             <div id="quill-container"></div>
         </div>
-        <div class="speech-btn mui-icon mui-icon-mic" @click="speechHandler"></div>
+        <div class="speech-btn mui-icon mui-icon-mic" data-state="stop" @click="speechHandler"></div>
         <RemoteJs src="https://cdn.bootcss.com/quill/1.3.6/quill.min.js"></RemoteJs>
     </div>
 </template>
@@ -107,10 +107,10 @@ export default {
         speechHandler(e) {
             if (e.target.dataset.state === 'stop') {
                 this.startRecognize()
-                speechBtn.dataset.state = 'speeching'
+                e.target.dataset.state = 'speeching'
             } else {
                 this.stopRecognize()
-                speechBtn.dataset.state = 'stop'
+                e.target.dataset.state = 'stop'
             }
         },
         startRecognize() {
@@ -136,7 +136,7 @@ export default {
             request.post('/user/updatewords', { user, title, date, content }).then(res => {
                 mui.toast('上传成功')
                 mui.openWindow({
-                    url: '/dashboard',
+                    url: 'http://139.199.72.216/dashboard',
                     id: 'dashboard'
                 })
             }).catch(err => console.log(err))
@@ -194,19 +194,7 @@ export default {
     left: 64px;
 }
 
-
-
-
-
-
-
-
-
-
-
 /*font styles*/
-
-
 /*字体*/
 
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value=SimSun]::before,
@@ -288,6 +276,7 @@ export default {
 .ql-font-sans-serif {
     font-family: "sans-serif";
 }
+
 
 
 
