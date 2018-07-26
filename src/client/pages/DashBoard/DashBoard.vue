@@ -70,8 +70,8 @@ export default {
         },
         getWordTextContent(content) {
             const contentObj = JSON.parse(content)
-            if (content.ops) {
-                return content.ops.map(item => {
+            if (contentObj.ops) {
+                return contentObj.ops.map(item => {
                     return item.insert.replace(/\n/g, '')
                 }).join('')
             }else {
@@ -88,6 +88,7 @@ export default {
             const btnArray = ['确定', '取消']
             const orginList2Set = new Set(this.orginList.map(item => item.title))
             mui.prompt('您可以为您的新文档起个名字：', '工作日志', '创建文档', btnArray, function(e) {
+                debugger
                 if (!e.index) {
                     if (orginList2Set.has(e.value)) {
                         mui.alert('文档已存在', '创建失败')
@@ -97,7 +98,7 @@ export default {
                             localStorage.setItem('title', e.value)
                             localStorage.removeItem('content')
                             mui.openWindow({
-                                url: 'http://139.199.72.216/editor',
+                                url: 'http://localhost:8081/editor',
                                 id: 'editor'
                             })
                         }, 500)
