@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import DashBoard from '@/client/pages/DashBoard/DashBoard'
-import Editor from '@/client/pages/Editor/Editor'
-import Login from '@/client/pages/Login/Login'
-import Register from '@/client/pages/Register/Register'
+import DashBoard from '@/pages/DashBoard/DashBoard'
+import Editor from '@/pages/Editor/Editor'
+import Login from '@/pages/Login/Login'
+import Register from '@/pages/Register/Register'
 
 Vue.use(Router)
 

@@ -53,7 +53,7 @@ let generalConfig = {
   resolve: {
     extensions: [".js", ".css", ".vue"],
     alias: {
-      '@': path.resolve('src')
+      '@': path.resolve('src/client')
     }
   },
   watch: false,

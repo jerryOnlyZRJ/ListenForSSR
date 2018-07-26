@@ -5,7 +5,7 @@
         </header>
         <div class="mui-content">
             <figure class="app-logo">
-                <img class="app-logo-image" src="@/client/assets/images/avatar.webp" />
+                <img class="app-logo-image" src="@/assets/images/avatar.webp" />
                 <span class="app-logo-title">高效智能的即时语音转文本工具</span>
             </figure>
             <div class="account-container">
@@ -24,6 +24,7 @@
     </div>
 </template>
 <script>
+import config from '@/config'
 import request from 'axios'
 import md5 from 'blueimp-md5'
 
@@ -51,7 +52,7 @@ export default {
                         sessionStorage.setItem('username', username)
                         setTimeout(() => {
                             mui.openWindow({
-                                url: 'http://139.199.72.216/',
+                                url: config.domain,
                                 id: 'login'
                             })
                         }, 1000)
