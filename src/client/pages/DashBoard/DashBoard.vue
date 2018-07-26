@@ -74,8 +74,8 @@ export default {
                 return contentObj.ops.map(item => {
                     return item.insert.replace(/\n/g, '')
                 }).join('')
-            }else {
-              return ''
+            } else {
+                return ''
             }
         },
         filterWordList(e) {
@@ -97,10 +97,7 @@ export default {
                         setTimeout(() => {
                             localStorage.setItem('title', e.value)
                             localStorage.removeItem('content')
-                            mui.openWindow({
-                                url: 'http://localhost:8081/editor',
-                                id: 'editor'
-                            })
+                            location.href = 'http://139.199.72.216/editor'
                         }, 500)
                     }
                 }
@@ -108,18 +105,12 @@ export default {
         },
         quitLogin() {
             //TODOS：增加后台cookie控制登录态
-            mui.openWindow({
-                url: 'http://139.199.72.216/',
-                id: 'login'
-            })
+            location.href = 'http://139.199.72.216/'
         },
         choiceWord(item, event) {
             localStorage.setItem('title', item.title)
             localStorage.setItem('content', item.content)
-            mui.openWindow({
-                url: 'http://139.199.72.216/editor',
-                id: 'editor'
-            })
+            location.href = 'http://139.199.72.216/editor'
         }
     }
 }

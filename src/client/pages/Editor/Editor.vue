@@ -135,10 +135,7 @@ export default {
             const date = (new Date()).toString()
             request.post('/user/updatewords', { user, title, date, content }).then(res => {
                 mui.toast('上传成功')
-                mui.openWindow({
-                    url: 'http://139.199.72.216/dashboard',
-                    id: 'dashboard'
-                })
+                location.href = 'http://139.199.72.216/dashboard'
             }).catch(err => console.log(err))
         }
     }
@@ -194,7 +191,10 @@ export default {
     left: 64px;
 }
 
+
 /*font styles*/
+
+
 /*字体*/
 
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value=SimSun]::before,
@@ -276,6 +276,7 @@ export default {
 .ql-font-sans-serif {
     font-family: "sans-serif";
 }
+
 
 
 
