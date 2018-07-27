@@ -59,6 +59,14 @@ export default class TestRouter {
         ctx.body = await this.userService.getWordList(username)
     }
 
+    // POST {user, title}
+    @route("/deleteword")
+    @POST()
+    async deleteWord(ctx) {
+        const deleteOptions = ctx.request.body
+        ctx.body = await this.userService.deleteWord(deleteOptions)
+    }
+
     // POST {user, title, date, content}
     @route("/updatewords")
     @POST()

@@ -120,6 +120,20 @@ let Mongodb = class Mongodb {
 		});
 	}
 
+	async deleteWord(user, title) {
+		const db = await this.connect2db();
+		const whereStr = {
+			title
+		};
+		return new Promise((resolve, reject) => {
+			db.db('listenfordata').collection(user).deleteOne(whereStr, function (err, res) {
+				if (err) reject(err);
+				resolve(res);
+				db.close();
+			});
+		});
+	}
+
 	async updateWord(user, wordOptions) {
 		const db = await this.connect2db();
 		const {

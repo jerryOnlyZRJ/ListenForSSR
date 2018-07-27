@@ -10,10 +10,11 @@
             </div>
             <div v-if="withoutWordItem" class="empty-info"><span>文档列表空空如也,</span><span>快点击右上角添加文档吧~</span></div>
             <ul v-else class="word-list">
-                <li v-for="(item, key) in filterList" :key="key" class="word-item" @click="choiceWord(item, $event)">
+                <li v-for="(item, index) in filterList" :key="index" :data-index="index" class="word-item">
                     <div class="word-title">{{item.title}}</div>
                     <div class="modified-date">{{ arrageDate(item.date) }}</div>
                     <div class="word-content">{{ getWordTextContent(item.content) }}</div>
+                    <div class="delete-thisword-container" @touchend="deleteThisWord(index, $event)"></div>
                 </li>
             </ul>
         </div>
@@ -43,7 +44,7 @@ export default {
     data() {
         return {
             orginList: [],
-            filterList: []
+            filterList: [],
         }
     },
     mounted() {
@@ -52,6 +53,54 @@ export default {
             this.orginList = res.data
             this.filterList = res.data
         })
+    },
+    updated: function() {
+        const wordList = document.querySelector('.word-list')
+        if (!wordList) return
+        let timer = null
+
+        function eventDelegate(node) {
+            if (node.tagName === "LI") {
+                return node
+            } else if (node.tagName === "UL") {
+                return ''
+            } else {
+                return eventDelegate(node.parentNode)
+            }
+        }
+
+        function clearTouchItem() {
+            const touchItem = document.querySelector('.touch')
+            touchItem && touchItem.classList.remove('touch')
+        }
+
+        wordList.addEventListener('touchstart', function(e) {
+            e.preventDefault()
+            const target = eventDelegate(e.target)
+            target.classList.add('touch')
+            if (target) {
+                timer = setTimeout(() => {
+                    clearTimeout(timer)
+                    timer = null
+                }, 1000);
+            } else {
+                clearTouchItem()
+            }
+        }, false);
+        wordList.addEventListener('touchend', (e) => {
+            const target = eventDelegate(e.target)
+            if (timer) {
+                clearTouchItem()
+                const itemIndex = target.dataset.index
+                localStorage.setItem('title', this.filterList[itemIndex].title)
+                localStorage.setItem('content', this.filterList[itemIndex].content)
+                location.href = config.domain + 'editor'
+            } else {
+                e.preventDefault()
+            }
+            clearTimeout(timer);
+            timer = null
+        }, false)
     },
     computed: {
         withoutWordItem() {
@@ -89,7 +138,6 @@ export default {
             const btnArray = ['确定', '取消']
             const orginList2Set = new Set(this.orginList.map(item => item.title))
             mui.prompt('您可以为您的新文档起个名字：', '工作日志', '创建文档', btnArray, function(e) {
-                debugger
                 if (!e.index) {
                     if (orginList2Set.has(e.value)) {
                         mui.alert('文档已存在', '创建失败')
@@ -104,14 +152,22 @@ export default {
                 }
             })
         },
+        deleteThisWord(index, e) {
+            e.preventDefault()
+            e.stopPropagation()
+            request.post('/user/deleteword', {
+                user: localStorage.getItem('username'),
+                title: localStorage.getItem('title')
+            }).then(res => {
+                if (res.data.ok) {
+                    this.filterList.splice(index, 1)
+                    this.orginList.splice(index, 1)
+                }
+            }).catch(err => console.log(err))
+        },
         quitLogin() {
             //TODOS：增加后台cookie控制登录态
             location.href = config.domain
-        },
-        choiceWord(item, event) {
-            localStorage.setItem('title', item.title)
-            localStorage.setItem('content', item.content)
-            location.href = config.domain + 'editor'
         }
     }
 }
@@ -144,6 +200,7 @@ export default {
 }
 
 .word-item {
+    position: relative;
     margin-top: 1rem;
     padding: 10px;
     background: #fff;
@@ -151,7 +208,7 @@ export default {
     transition: background .3s;
 }
 
-.word-item:active {
+.word-item.touch {
     background: #AAAAAA;
 }
 
@@ -175,6 +232,11 @@ export default {
     font-size: .5rem;
     color: #aaa;
     text-align: right;
+    transition: opacity .6s;
+}
+
+.touch .modified-date {
+    opacity: 0;
 }
 
 .word-content {
@@ -186,5 +248,27 @@ export default {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.delete-thisword-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 73px;
+    background: rgba(0, 0, 0, .3);
+    font-size: 2rem;
+    color: red;
+}
+
+.touch .delete-thisword-container {
+    display: flex;
+}
+
+.delete-thisword-container::before {
+    content: '❌'
 }
 </style>

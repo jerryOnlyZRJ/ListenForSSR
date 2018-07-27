@@ -56,6 +56,14 @@ class UserService {
     return await this.mongodb.getWordList(user)
   }
 
+  async deleteWord(deleteOptions) {
+    const {
+      user,
+      title
+    } = deleteOptions
+    return await this.mongodb.deleteWord(user, title)
+  }
+
   async updateWords(updateOptions) {
     const {
       user,

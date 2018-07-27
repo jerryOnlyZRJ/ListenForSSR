@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _class, _desc, _value, _class2;
+var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _class, _desc, _value, _class2;
 
 var _awilixKoa = require('awilix-koa');
 
@@ -38,7 +38,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
     return desc;
 }
 
-let TestRouter = (_dec = (0, _awilixKoa.route)('/user'), _dec2 = (0, _awilixKoa.GET)(), _dec3 = (0, _awilixKoa.route)("/register"), _dec4 = (0, _awilixKoa.POST)(), _dec5 = (0, _awilixKoa.route)("/login"), _dec6 = (0, _awilixKoa.POST)(), _dec7 = (0, _awilixKoa.route)("/iswordexists"), _dec8 = (0, _awilixKoa.POST)(), _dec9 = (0, _awilixKoa.route)("/getwordlist"), _dec10 = (0, _awilixKoa.GET)(), _dec11 = (0, _awilixKoa.route)("/updatewords"), _dec12 = (0, _awilixKoa.POST)(), _dec(_class = (_class2 = class TestRouter {
+let TestRouter = (_dec = (0, _awilixKoa.route)('/user'), _dec2 = (0, _awilixKoa.GET)(), _dec3 = (0, _awilixKoa.route)("/register"), _dec4 = (0, _awilixKoa.POST)(), _dec5 = (0, _awilixKoa.route)("/login"), _dec6 = (0, _awilixKoa.POST)(), _dec7 = (0, _awilixKoa.route)("/iswordexists"), _dec8 = (0, _awilixKoa.POST)(), _dec9 = (0, _awilixKoa.route)("/getwordlist"), _dec10 = (0, _awilixKoa.GET)(), _dec11 = (0, _awilixKoa.route)("/deleteword"), _dec12 = (0, _awilixKoa.POST)(), _dec13 = (0, _awilixKoa.route)("/updatewords"), _dec14 = (0, _awilixKoa.POST)(), _dec(_class = (_class2 = class TestRouter {
     constructor({
         userService
     }) {
@@ -86,11 +86,18 @@ let TestRouter = (_dec = (0, _awilixKoa.route)('/user'), _dec2 = (0, _awilixKoa.
         ctx.body = await this.userService.getWordList(username);
     }
 
+    // POST {user, title}
+
+    async deleteWord(ctx) {
+        const deleteOptions = ctx.request.body;
+        ctx.body = await this.userService.deleteWord(deleteOptions);
+    }
+
     // POST {user, title, date, content}
 
     async updateWords(ctx) {
         const updateOptions = ctx.request.body;
         ctx.body = await this.userService.updateWords(updateOptions);
     }
-}, (_applyDecoratedDescriptor(_class2.prototype, 'getTest', [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, 'getTest'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'register', [_dec3, _dec4], Object.getOwnPropertyDescriptor(_class2.prototype, 'register'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'login', [_dec5, _dec6], Object.getOwnPropertyDescriptor(_class2.prototype, 'login'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'isWordExists', [_dec7, _dec8], Object.getOwnPropertyDescriptor(_class2.prototype, 'isWordExists'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'getWordList', [_dec9, _dec10], Object.getOwnPropertyDescriptor(_class2.prototype, 'getWordList'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'updateWords', [_dec11, _dec12], Object.getOwnPropertyDescriptor(_class2.prototype, 'updateWords'), _class2.prototype)), _class2)) || _class);
+}, (_applyDecoratedDescriptor(_class2.prototype, 'getTest', [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, 'getTest'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'register', [_dec3, _dec4], Object.getOwnPropertyDescriptor(_class2.prototype, 'register'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'login', [_dec5, _dec6], Object.getOwnPropertyDescriptor(_class2.prototype, 'login'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'isWordExists', [_dec7, _dec8], Object.getOwnPropertyDescriptor(_class2.prototype, 'isWordExists'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'getWordList', [_dec9, _dec10], Object.getOwnPropertyDescriptor(_class2.prototype, 'getWordList'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'deleteWord', [_dec11, _dec12], Object.getOwnPropertyDescriptor(_class2.prototype, 'deleteWord'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'updateWords', [_dec13, _dec14], Object.getOwnPropertyDescriptor(_class2.prototype, 'updateWords'), _class2.prototype)), _class2)) || _class);
 exports.default = TestRouter;
