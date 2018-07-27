@@ -14,7 +14,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * node配置对象
  * @type {Object}
  */
-let CONFIG = {
+const CONFIG = {
   'env': process.env.NODE_ENV, //"development", "production"
   '404Path': _path2.default.join(__dirname, '../views/common/404.html'),
   'viewsPath': _path2.default.join(__dirname, '../views'),

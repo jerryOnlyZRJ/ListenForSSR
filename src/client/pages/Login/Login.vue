@@ -4,6 +4,7 @@
             <h1 class="mui-title">ListenFor</h1>
         </header>
         <div class="mui-content">
+            <span class="try-it mui-icon mui-icon-forward" @click="takeATry">立即体验</span>
             <figure class="app-logo">
                 <img class="app-logo-image" src="@/assets/images/avatar.webp" />
                 <span class="app-logo-title">高效智能的即时语音转文本工具</span>
@@ -52,6 +53,10 @@ export default {
         }
     },
     methods: {
+        takeATry() {
+            localStorage.setItem('title', "Try")
+            location.href = `${config.domain}editor`
+        },
         loginHandler() {
             const username = this.$refs.usernameInput.value
             const password = this.$refs.passwordInput.value
@@ -68,12 +73,18 @@ export default {
                     if (!res.data.state) {
                         mui.toast('登录成功')
                         localStorage.setItem('username', username)
-                        setTimeout(() => {
-                            mui.openWindow({
-                                url: config.domain + 'dashboard',
-                                id: 'dashboard'
-                            })
-                        }, 1000)
+                        if (localStorage.getItem('hasEditorWithoutAccount')) {
+                            setTimeout(() => {
+                                location.href = config.domain + 'editor'
+                            }, 1000)
+                        } else {
+                            setTimeout(() => {
+                                mui.openWindow({
+                                    url: config.domain + 'dashboard',
+                                    id: 'dashboard'
+                                })
+                            }, 1000)
+                        }
                     } else {
                         mui.alert(res.data.msg, '登录失败')
                     }
@@ -103,10 +114,23 @@ export default {
     background: #fff;
 }
 
+.try-it {
+    position: absolute;
+    right: 1rem;
+    top: 60px;
+    font-size: 1.2rem;
+    color: #999;
+}
+
+.try-it::before {
+    float: right;
+}
+
 .app-logo {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 3rem 40px 1rem;
 }
 
 .app-logo-image {

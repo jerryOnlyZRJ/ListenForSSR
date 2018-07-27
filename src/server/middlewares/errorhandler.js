@@ -49,8 +49,9 @@ const errorHandler = {
     app.use(async (ctx, next) => {
       await next()
       if (ctx.status !== 404) return
-      ctx.status = 404
-      ctx.body = await ctx.render('404')
+      ctx.status = 304
+      ctx.redirect('/')
+      ctx.body = 'Redirect to login page'
     })
   }
 }

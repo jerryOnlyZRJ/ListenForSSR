@@ -133,11 +133,19 @@ export default {
             const user = localStorage.getItem('username')
             const title = this.title
             const content = JSON.stringify(quill.getContents())
-            const date = (new Date()).toString()
-            request.post('/user/updatewords', { user, title, date, content }).then(res => {
-                mui.toast('上传成功')
-                location.href = config.domain + 'dashboard'
-            }).catch(err => console.log(err))
+            if (!user) {
+                localStorage.setItem('hasEditorWithoutAccount', 1)
+                localStorage.setItem('content', content)
+                mui.alert('未检测到账号，请重新登录', '上传失败', function() {
+                    location.href = config.domain
+                })
+            } else {
+                const date = (new Date()).toString()
+                request.post('/user/updatewords', { user, title, date, content }).then(res => {
+                    mui.toast('上传成功')
+                    location.href = config.domain + 'dashboard'
+                }).catch(err => console.log(err))
+            }
         }
     }
 }
@@ -191,6 +199,8 @@ export default {
 .mui-popover .mui-popover-arrow {
     left: 64px;
 }
+
+
 
 
 /*font styles*/
@@ -277,6 +287,8 @@ export default {
 .ql-font-sans-serif {
     font-family: "sans-serif";
 }
+
+
 
 
 

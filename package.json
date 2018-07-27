@@ -11,6 +11,7 @@
 		"client:server-prod": "webpack --mode production --env server",
 		"client:ssr-dev": "npm run client:dev && npm run client:server-dev",
 		"client:ssr-prod": "npm run client:prod && npm run client:server-prod",
+		"ui:test": "webpack-dev-server --hot",
 		"server": "gulp",
 		"start:dev": "supervisor dist/app.js",
 		"start": "pm2 start pm2.json"
@@ -48,6 +49,7 @@
 		"vue-template-compiler": "^2.5.16",
 		"webpack": "^4.12.0",
 		"webpack-cli": "^3.0.4",
+		"webpack-dev-server": "^3.1.5",
 		"webpack-merge": "^4.1.2",
 		"yargs-parser": "^10.0.0"
 	},
