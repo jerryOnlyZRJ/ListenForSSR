@@ -14,7 +14,8 @@
 		"ui:test": "webpack-dev-server --hot",
 		"server": "gulp",
 		"start:dev": "supervisor dist/app.js",
-		"start": "pm2 start pm2.json"
+		"start": "pm2 start pm2.json",
+		"test:ui": "backstop test"
 	},
 	"author": "Ranjay Zheng",
 	"license": "ISC",
@@ -26,6 +27,7 @@
 		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"babel-preset-env": "^1.7.0",
+		"backstopjs": "^3.5.2",
 		"clean-webpack-plugin": "^0.1.19",
 		"copy-webpack-plugin": "^4.5.2",
 		"css-loader": "^0.28.11",
