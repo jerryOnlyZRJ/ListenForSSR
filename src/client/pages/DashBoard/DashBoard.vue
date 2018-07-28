@@ -69,28 +69,23 @@ export default {
             }
         }
 
-        function clearTouchItem() {
-            const touchItem = document.querySelector('.touch')
-            touchItem && touchItem.classList.remove('touch')
-        }
-
-        wordList.addEventListener('touchstart', function(e) {
+        wordList.addEventListener('touchstart', (e) => {
             e.preventDefault()
             const target = eventDelegate(e.target)
-            target.classList.add('touch')
             if (target) {
+                target.classList.add('touch')
                 timer = setTimeout(() => {
                     clearTimeout(timer)
                     timer = null
                 }, 1000);
             } else {
-                clearTouchItem()
+                this.clearTouchItem()
             }
         }, false);
         wordList.addEventListener('touchend', (e) => {
             const target = eventDelegate(e.target)
             if (timer) {
-                clearTouchItem()
+                this.clearTouchItem()
                 const itemIndex = target.dataset.index
                 localStorage.setItem('title', this.filterList[itemIndex].title)
                 localStorage.setItem('content', this.filterList[itemIndex].content)
@@ -108,6 +103,10 @@ export default {
         }
     },
     methods: {
+        clearTouchItem() {
+            const touchItem = document.querySelector('.touch')
+            touchItem && touchItem.classList.remove('touch')
+        },
         arrageDate(dateStr) {
             const date = new Date(dateStr)
             const year = date.getFullYear()
@@ -152,21 +151,42 @@ export default {
                 }
             })
         },
-        deleteThisWord(index, e) {
+        deleteThisWord(index, e){
             e.preventDefault()
             e.stopPropagation()
-            request.post('/user/deleteword', {
+            this.clearTouchItem()
+            const title = this.filterList[index].title
+            const deleteOptions = {
                 user: localStorage.getItem('username'),
-                title: localStorage.getItem('title')
-            }).then(res => {
-                if (res.data.ok) {
+                title
+            }
+
+            function postAdeleteRequest(callback, deleteOptions) {
+                request.post('/user/deleteword', deleteOptions).then(res => {
+                    if (res.data.n) {
+                        callback()
+                    }
+                }).catch(err => console.log(err))
+            }
+
+            if (this.filterList === this.orginList) {
+                postAdeleteRequest(() => {
+                    mui.toast(`删除${title}成功`)
                     this.filterList.splice(index, 1)
-                    this.orginList.splice(index, 1)
-                }
-            }).catch(err => console.log(err))
+                }, deleteOptions)
+            } else {
+                const indexInOriginList = this.orginList.indexOf(this.orginList.find(originItem => originItem.title === title))
+                postAdeleteRequest(() => {
+                    mui.toast(`删除${title}成功`)
+                    this.filterList.splice(index, 1)
+                    this.orginList.splice(indexInOriginList, 1)
+                }, deleteOptions)
+            }
         },
         quitLogin() {
             //TODOS：增加后台cookie控制登录态
+            localStorage.removeItem('username')
+            localStorage.removeItem('content')
             location.href = config.domain
         }
     }
@@ -202,7 +222,7 @@ export default {
 .word-item {
     position: relative;
     margin-top: 1rem;
-    padding: 10px;
+    padding: 5px 10px;
     background: #fff;
     box-shadow: 0px 2px 2px 3px rgba(0, 0, 0, 0.3);
     transition: background .3s;
@@ -222,6 +242,7 @@ export default {
     font-size: 1.5rem;
     font-weight: bold;
     overflow: hidden;
+    line-height: 1.5;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
@@ -231,6 +252,7 @@ export default {
     width: 50%;
     font-size: .5rem;
     color: #aaa;
+    line-height: 3;
     text-align: right;
     transition: opacity .6s;
 }
