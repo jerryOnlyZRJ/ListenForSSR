@@ -140,9 +140,11 @@ export default {
                     location.href = config.domain
                 })
             } else {
+                localStorage.removeItem('hasEditorWithoutAccount')
                 const date = (new Date()).toString()
                 request.post('/user/updatewords', { user, title, date, content }).then(res => {
                     mui.toast('上传成功')
+                    localStorage.removeItem('content')
                     location.href = config.domain + 'dashboard'
                 }).catch(err => console.log(err))
             }

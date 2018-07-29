@@ -7,6 +7,11 @@ const rize = new Rize({
 rize
   .goto('http://listenfor.jerryonlyzrj.com/')
   .click('.try-it')
-  .waitForNavigation()
   .saveScreenshot('try-it.png')
+  .end()
+
+rize
+  .goto('http://listenfor.jerryonlyzrj.com/')
+  .waitForNavigation()
+  .saveScreenshot('rigister.png')
   .end()

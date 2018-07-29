@@ -49,13 +49,19 @@ export default {
                 }).then(res => {
                     if (!res.data.state) {
                         mui.toast('注册成功')
-                        sessionStorage.setItem('username', username)
-                        setTimeout(() => {
-                            mui.openWindow({
-                                url: config.domain,
-                                id: 'login'
-                            })
-                        }, 1000)
+                        localStorage.setItem('username', username)
+                        if (localStorage.getItem('hasEditorWithoutAccount')) {
+                            setTimeout(() => {
+                                location.href = config.domain + 'editor'
+                            }, 1000)
+                        } else {
+                            setTimeout(() => {
+                                mui.openWindow({
+                                    url: config.domain + 'dashboard',
+                                    id: 'dashboard'
+                                })
+                            }, 1000)
+                        }
                     } else {
                         mui.alert(res.data.msg, '注册失败')
                     }
