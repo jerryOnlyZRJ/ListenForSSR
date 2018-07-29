@@ -2,17 +2,17 @@
   "publicPath": "/",
   "all": [
     "images/avatar-c6749.webp",
-    "scripts/common/utils-58e6f.bundle.js",
-    "scripts/common/vendor-58e6f.bundle.js",
-    "styles/main-58e6f.css",
-    "scripts/main-58e6f.bundle.js",
+    "scripts/common/utils-b968c.bundle.js",
+    "scripts/common/vendor-b968c.bundle.js",
+    "styles/main-b968c.css",
+    "scripts/main-b968c.bundle.js",
     "index.html",
     "images/favicon.ico"
   ],
   "initial": [
-    "scripts/common/vendor-58e6f.bundle.js",
-    "scripts/common/utils-58e6f.bundle.js",
-    "scripts/main-58e6f.bundle.js"
+    "scripts/common/vendor-b968c.bundle.js",
+    "scripts/common/utils-b968c.bundle.js",
+    "scripts/main-b968c.bundle.js"
   ],
   "async": [],
   "modules": {
