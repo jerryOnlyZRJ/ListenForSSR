@@ -9,6 +9,8 @@ gulp.task('build', cb => {
 				babelrc: false,
 				'plugins': ['transform-es2015-modules-commonjs', "transform-decorators-legacy"]
 			}),
+			gulp.src('./src/server/pm2.json'),
+			gulp.src('./package.json'),
 			gulp.dest('dist')
 		],
 		cb
