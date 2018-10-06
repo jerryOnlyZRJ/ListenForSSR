@@ -4,7 +4,8 @@
 	"description": "A git web UI project —— SPA",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "echo \"Error: no test specified\" && exit 0",
+		"build": "npm run client:ssr-prod",
 		"client:dev": "webpack --mode development",
 		"client:prod": "webpack --mode production",
 		"client:server-dev": "webpack --mode development --env server",
