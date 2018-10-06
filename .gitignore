@@ -6,7 +6,7 @@ node_modules/
 dist/logs
 #test coverage
 docs/coverage
-#ssh key
+#ssh key 
 listenfor_travis_key
 #ssh config
 ssh_config
