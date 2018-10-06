@@ -6,3 +6,7 @@ node_modules/
 dist/logs
 #test coverage
 docs/coverage
+#ssh key
+resume_travis_key
+#ssh config
+ssh_config
