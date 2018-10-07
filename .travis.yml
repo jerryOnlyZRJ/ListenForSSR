@@ -7,7 +7,7 @@ cache:
 before_install:
 - openssl aes-256-cbc -K $encrypted_63873d3cb938_key -iv $encrypted_63873d3cb938_iv
   -in secrets.tar.enc -out secrets.tar -d
-- rm -rf ~/.ssh/known_hosts
+- ssh-keygen -R 118.89.249.254
 - tar xvf secrets.tar
 - cp ssh_config ~/.ssh/config
 - cp listenfor_travis_key /tmp/listenfor_travis_key
