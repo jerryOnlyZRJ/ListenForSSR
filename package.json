@@ -12,7 +12,7 @@
 		"client:server-prod": "webpack --mode production --env server",
 		"client:ssr-dev": "npm run client:dev && npm run client:server-dev",
 		"client:ssr-prod": "npm run client:prod && npm run client:server-prod",
-		"ui:test": "webpack-dev-server --hot",
+		"client:test": "webpack-dev-server --hot",
 		"server": "gulp",
 		"start:dev": "supervisor dist/app.js",
 		"start": "pm2 start pm2.json",

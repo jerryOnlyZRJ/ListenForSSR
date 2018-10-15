@@ -40,6 +40,17 @@ let generalConfig = {
     publicPath: '/',
     filename: 'scripts/[name].bundle.js'
   },
+  // webpack-dev-server配置
+  // 此插件底层是基于express启动的服务
+  // devServer: {
+  //   port: 8081,
+  //   before: function (app) {
+  //     // mock请求
+  //     app.get('/api/test', function (req, res) {
+  //       res.json({ custom: 'response' });
+  //     });
+  //   }
+  // },
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
