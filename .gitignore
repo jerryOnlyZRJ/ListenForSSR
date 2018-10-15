@@ -10,3 +10,5 @@ docs/coverage
 listenfor_travis_key
 #ssh config
 ssh_config
+# ui test result
+backstop_data/bitmaps_test/
