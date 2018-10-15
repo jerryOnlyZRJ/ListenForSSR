@@ -44,7 +44,7 @@ app.use(assets(CONFIG.assetsPath))
 app.context.render = co.wrap(render({
   root: CONFIG.viewsPath,
   autoescape: true,
-  varControls: ['[[', ']]'], //自定义模板匹配
+  varControls: ['[[', ']]'], //自定义模板匹配，常见Moustache语法：{{ }}
   cache: 'memory', // disable, set to false (配置缓存)
   ext: 'html', // 匹配模版类型
   writeBody: false

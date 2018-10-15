@@ -11,6 +11,12 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+// webpack构建性能监控
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
+const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+
 const argv = require('yargs-parser')(process.argv.slice(2));
 const merge = require('webpack-merge');
 const _mode = argv.mode || "development";
@@ -55,6 +61,7 @@ let generalConfig = {
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
+        // 多核执行压缩
         parallel: true,
         sourceMap: true // set to true if you want JS source maps
       }),
@@ -129,8 +136,16 @@ let generalConfig = {
     new CopyWebpackPlugin([{
       from: path.join(__dirname, 'favicon.ico'),
       to: path.join(__dirname, '/dist/assets/images')
-    }])
+    }]),
+    new WebpackBuildNotifierPlugin({
+      title: "My Project Webpack Build",
+      // logo: path.resolve("./img/favicon.png"),
+      suppressSuccess: true
+    }),
+    new ProgressBarPlugin(),
   ]
 }
 
-module.exports = merge(generalConfig, _mergeConfig)
+const webpackConfig = smp.wrap(merge(generalConfig, _mergeConfig))
+
+module.exports = webpackConfig
