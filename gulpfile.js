@@ -18,10 +18,10 @@ gulp.task('build', cb => {
 })
 
 gulp.task('watch', function() {
-	gulp.watch(['src/server/**/*.js', 'src/server/app.js'], ['build']).on('change', () => {
+	gulp.watch(['src/server/**/*.js', 'src/server/app.js'], gulp.parallel(['build'])).on('change', () => {
 		console.log('file is changed')
 	})
 })
 
 const _task = ['build', 'watch']
-gulp.task('default', _task)
+gulp.task('default', gulp.series(_task))

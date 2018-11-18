@@ -68,7 +68,7 @@ app.use((0, _koaStatic2.default)(_config2.default.assetsPath));
 app.context.render = _co2.default.wrap((0, _koaSwig2.default)({
   root: _config2.default.viewsPath,
   autoescape: true,
-  varControls: ['[[', ']]'], //自定义模板匹配
+  varControls: ['[[', ']]'], //自定义模板匹配，常见Moustache语法：{{ }}
   cache: 'memory', // disable, set to false (配置缓存)
   ext: 'html', // 匹配模版类型
   writeBody: false
